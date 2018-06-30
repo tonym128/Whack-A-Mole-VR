@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    public int score;
 
 	// Use this for initialization
 	void Start () {
-		
+        score = 0;
 	}
 	
 	// Update is called once per frame
@@ -16,9 +17,11 @@ public class Player : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit))
             {
-                if (hit.transform.GetComponent<Mole>() != null)
+                Mole mole = hit.transform.GetComponent<Mole>();
+                if (mole != null)
                 {
-                    Debug.Log("Hit a mole");
+                    mole.OnHit();
+                    score += 1;
                 }
             }
         }
